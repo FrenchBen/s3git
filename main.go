@@ -18,7 +18,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/s3git/s3git/cmd"
+	"github.com/frenchben/s3git/cmd"
 	"github.com/spf13/viper"
 	"os"
 )
