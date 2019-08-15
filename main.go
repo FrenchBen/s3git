@@ -20,6 +20,7 @@ import (
 	"fmt"
 	"github.com/frenchben/s3git/cmd"
 	"github.com/spf13/viper"
+	"log"
 	"os"
 )
 
@@ -38,23 +39,24 @@ func main() {
 	viper.AddConfigPath("$HOME/.s3git")
 
 	// AWS_PROFILE or S3GIT_PROFILE can set the profile
-	viper.BindEnv("profile", "AWS_PROFILE");
+	viper.BindEnv("profile", "AWS_PROFILE")
 
 	for _, ext := range []string{"json", "yaml", "yml"} {
 		viper.SetConfigType(ext)
 		err := viper.ReadInConfig() // Find and read config files
-		if err != nil { // Handle errors reading the config file
+		if err != nil {             // Handle errors reading the config file
 			if _, ok := err.(viper.ConfigParseError); ok {
-				panic(fmt.Errorf("Fatal error reading " + ext + " config file: %s \n", err))
+				panic(fmt.Errorf("Fatal error reading "+ext+" config file: %s \n", err))
 			}
 		}
 	}
 
 	for _, extrafile := range []string{"$HOME/.aws/config", "$HOME/.aws/credentials"} {
 
-		viper.SetConfigType("yaml") // TODO: this should be INI
+		viper.SetConfigType("yaml")    // TODO: this should be INI
 		viper.SetConfigFile(extrafile) // name of config file (without extension)
-		err := viper.ReadInConfig() // Find and read the config file
+		err := viper.ReadInConfig()    // Find and read the config file
+		log.Printf("Dump all viper settings: %+v\n\n", viper.AllSettings())
 
 		if err != nil { // Handle errors reading the config file
 			if _, ok := err.(viper.ConfigParseError); ok {

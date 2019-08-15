@@ -27,13 +27,13 @@ import (
 var remoteCmd = &cobra.Command{
 	Use:   "remote",
 	Short: "Manage remote repositories",
-	Long: "Manage remote repositories",
+	Long:  "Manage remote repositories",
 }
 
 var remoteAddCmd = &cobra.Command{
 	Use:   "add [name]",
 	Short: "Add a remote repository",
-	Long: "Add a remote repository",
+	Long:  "Add a remote repository",
 	Run: func(cmd *cobra.Command, args []string) {
 
 		if len(args) == 0 {
@@ -48,6 +48,7 @@ var remoteAddCmd = &cobra.Command{
 		}
 
 		options := []s3git.RemoteOptions{}
+		// Lookup of endpoint, although defined by CLI
 		options = append(options, s3git.RemoteOptionSetEndpoint(viper.GetString(ENDPOINT)))
 
 		err = repo.RemoteAdd(args[0], resource, viper.GetString(ACCESS_KEY), viper.GetString(SECRET_KEY), options...)
@@ -60,7 +61,7 @@ var remoteAddCmd = &cobra.Command{
 var remoteRemoveCmd = &cobra.Command{
 	Use:   "remove [name]",
 	Short: "Remove a remote repository",
-	Long: "Remove a remote repository",
+	Long:  "Remove a remote repository",
 	Run: func(cmd *cobra.Command, args []string) {
 
 		if len(args) == 0 {
@@ -82,7 +83,7 @@ var remoteRemoveCmd = &cobra.Command{
 var remoteShowCmd = &cobra.Command{
 	Use:   "show",
 	Short: "Show remote repositories",
-	Long: "Show remote repositories",
+	Long:  "Show remote repositories",
 	Run: func(cmd *cobra.Command, args []string) {
 
 		repo, err := s3git.OpenRepository(".")

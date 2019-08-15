@@ -37,6 +37,10 @@ var endpoint string
 var accessKey string
 var secretKey string
 
+// viper.SetDefault("ENDPOINT", "https://localhost")
+// viper.SetDefault("ACCESS_KEY", "access")
+// viper.SetDefault("SECRET_KEY", "secret")
+
 // This represents the base command when called without any subcommands
 var RootCmd = &cobra.Command{
 	Use:   "s3git",
@@ -65,7 +69,7 @@ func init() {
 	cmd.PersistentFlags().StringVarP(&secretKey, SECRET_KEY, "s", "", "Secret key for S3 remote")
 	viper.BindPFlag(SECRET_KEY, cmd.PersistentFlags().Lookup(SECRET_KEY))
 	cmd.PersistentFlags().StringVarP(&endpoint, ENDPOINT, "e", "", "Endpoint for S3 remote")
-	viper.BindPFlag(ENDPOINT, cloneCmd.PersistentFlags().Lookup(ENDPOINT))
+	viper.BindPFlag(ENDPOINT, cmd.PersistentFlags().Lookup(ENDPOINT))
 }
 
 // initConfig reads in config file

@@ -1,10 +1,8 @@
 s3git: git for Cloud Storage<br/>(or Version Control for Data)
 ==============================================================
 [![CircleCI](https://circleci.com/gh/FrenchBen/s3git.svg?style=svg)](https://circleci.com/gh/FrenchBen/s3git)
-==============================================================
-
-
 [![Join the chat at https://gitter.im/s3git/s3git](https://badges.gitter.im/s3git/s3git.svg)](https://gitter.im/s3git/s3git?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+==============================================================
 
 s3git applies the git philosophy to Cloud Storage. If you know git, you will know how to use s3git!
 
@@ -15,13 +13,13 @@ Exactly like git, s3git does not require any server-side components, just downlo
 Use cases for s3git
 -------------------
 
-- Build and Release Management (see [example](https://github.com/s3git/s3git/blob/master/BINARY-RELEASE-MANAGEMENT.md) with all Kubernetes releases).
+- Build and Release Management (see [example](https://github.com/frenchben/s3git/blob/master/docs/BINARY-RELEASE-MANAGEMENT.md) with all Kubernetes releases).
 - DevOps Scenarios
 - Data Consolidation
 - Analytics
 - Photo and Video storage
 
-See [use cases](https://github.com/s3git/s3git/blob/master/USECASES.md) for a detailed description of these use cases.
+See [use cases](https://github.com/frenchben/s3git/blob/master/docs/USECASES.md) for a detailed description of these use cases.
 
 Download binaries
 -----------------
@@ -30,11 +28,11 @@ Download binaries
 
 ### OSX
 
-Download `s3git` from [https://github.com/s3git/s3git/releases/download/v0.9.2/s3git-darwin-amd64](https://github.com/s3git/s3git/releases/download/v0.9.2/s3git-darwin-amd64)
+Download `s3git` from [https://github.com/frenchben/s3git/releases/download/v0.9.2/s3git-darwin-amd64](https://github.com/frenchben/s3git/releases/download/v0.9.2/s3git-darwin-amd64)
 
 ```sh
 $ mkdir s3git && cd s3git
-$ wget -q -O s3git https://github.com/s3git/s3git/releases/download/v0.9.2/s3git-darwin-amd64
+$ wget -q -O s3git https://github.com/frenchben/s3git/releases/download/v0.9.2/s3git-darwin-amd64
 $ chmod +x s3git
 $ export PATH=$PATH:${PWD}   # Add current dir where s3git has been downloaded to
 $ s3git
@@ -42,11 +40,11 @@ $ s3git
 
 ### Linux
 
-Download `s3git` from [https://github.com/s3git/s3git/releases/download/v0.9.2/s3git-linux-amd64](https://github.com/s3git/s3git/releases/download/v0.9.2/s3git-linux-amd64)
+Download `s3git` from [https://github.com/frenchben/s3git/releases/download/v0.9.2/s3git-linux-amd64](https://github.com/frenchben/s3git/releases/download/v0.9.2/s3git-linux-amd64)
 
 ```sh
 $ mkdir s3git && cd s3git
-$ wget -q -O s3git https://github.com/s3git/s3git/releases/download/v0.9.2/s3git-linux-amd64
+$ wget -q -O s3git https://github.com/frenchben/s3git/releases/download/v0.9.2/s3git-linux-amd64
 $ chmod +x s3git
 $ export PATH=$PATH:${PWD}   # Add current dir where s3git has been downloaded to
 $ s3git
@@ -54,7 +52,7 @@ $ s3git
 
 ### Windows
 
-Download `s3git.exe` from [https://github.com/s3git/s3git/releases/download/v0.9.1/s3git.exe](https://github.com/s3git/s3git/releases/download/v0.9.1/s3git.exe)
+Download `s3git.exe` from [https://github.com/frenchben/s3git/releases/download/v0.9.1/s3git.exe](https://github.com/frenchben/s3git/releases/download/v0.9.1/s3git.exe)
 
 ```
 C:\Users\Username\Downloads> s3git.exe
@@ -66,16 +64,16 @@ Building from source
 Build instructions are as follows (see [install golang](https://docs.minio.io/docs/how-to-install-golang) for setting up a working golang environment):
 
 ```sh
-$ go get -d github.com/s3git/s3git
-$ cd $GOPATH/src/github.com/s3git/s3git
-$ go install
+$ go get -d github.com/frenchben/s3git
+$ cd $GOPATH/src/github.com/frenchben/s3git
+$ make install
 $ s3git
 ```
 
 BLAKE2 Tree Hashing and Storage Format
 --------------------------------------
 
-Read [here](https://github.com/s3git/s3git/blob/master/BLAKE2.md) how s3git uses the BLAKE2 Tree hashing mode for both [deduplicated](https://github.com/s3git/s3git/blob/master/BLAKE2.md#deduplicated) and [hydrated](https://github.com/s3git/s3git/blob/master/BLAKE2.md#hydrated) storage (and [here](https://github.com/s3git/s3git/blob/master/BLAKE2-and-Scalability.md) for info for BLAKE2 at scale).
+Read [here](https://github.com/frenchben/s3git/blob/master/docs/BLAKE2.md) how s3git uses the BLAKE2 Tree hashing mode for both [deduplicated](https://github.com/frenchben/s3git/blob/master/docs/BLAKE2.md#deduplicated) and [hydrated](https://github.com/frenchben/s3git/blob/master/docs/BLAKE2.md#hydrated) storage (and [here](https://github.com/frenchben/s3git/blob/master/docs/BLAKE2-and-Scalability.md) for info for BLAKE2 at scale).
 
 Example workflow
 ----------------
@@ -163,7 +161,7 @@ $ more text2.txt
 Another file
 ```
 
-Note that snapshotting works for all files in the directory including any subdirectories. Click the following link for a more elaborate repository that includes all releases of the [Kubernetes](https://github.com/s3git/s3git/blob/master/BINARY-RELEASE-MANAGEMENT.md) project.
+Note that snapshotting works for all files in the directory including any subdirectories. Click the following link for a more elaborate repository that includes all releases of the [Kubernetes](https://github.com/frenchben/s3git/blob/master/docs/BINARY-RELEASE-MANAGEMENT.md) project.
 
 Clone the YFCC100M dataset
 --------------------------

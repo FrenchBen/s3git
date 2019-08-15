@@ -18,6 +18,8 @@ build:     ## Builds the CLI
 	-ldflags "-w -X ${PACKAGE}/cmd.version=${VERSION} -X ${PACKAGE}/cmd.commit=${GIT} -X ${PACKAGE}/cmd.date=${DATE}" \
 	-a -tags netgo -o execs/${NAME} *.go
 
+install: build     ## Install the binary built to your GOPATH/bin
+	cp execs/${NAME} $${GOPATH}/bin
 
 help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[38;5;69m%-30s\033[38;5;38m %s\033[0m\n", $$1, $$2}'
