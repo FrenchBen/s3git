@@ -23,11 +23,9 @@ import (
 )
 
 var (
-	shortened = false
-	version   = "dev"
-	commit    = "none"
-	date      = "unknown"
-	output    = "json"
+	version = "dev"
+	commit  = "none"
+	date    = "unknown"
 )
 
 // versionCmd represents the ls command
@@ -37,9 +35,10 @@ var versionCmd = &cobra.Command{
 	Long:  "List files in the repository",
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("S3Git")
-		fmt.Println(fmt.Sprintf("\n%-10s %s\n", "Version:", version))
-		fmt.Println(fmt.Sprintf("%-10s %s\n", "Commit:", version))
-		fmt.Println(fmt.Sprintf("%-10s %s\n", "Date:", version))
+		fmt.Println("")
+		fmt.Println(fmt.Sprintf("%-10s %s", "Version:", version))
+		fmt.Println(fmt.Sprintf("%-10s %s", "Commit:", commit))
+		fmt.Println(fmt.Sprintf("%-10s %s", "Date:", date))
 	},
 }
 

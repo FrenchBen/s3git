@@ -1,5 +1,8 @@
 s3git: git for Cloud Storage<br/>(or Version Control for Data)
 ==============================================================
+[![CircleCI](https://circleci.com/gh/FrenchBen/s3git.svg?style=svg)](https://circleci.com/gh/FrenchBen/s3git)
+==============================================================
+
 
 [![Join the chat at https://gitter.im/s3git/s3git](https://badges.gitter.im/s3git/s3git.svg)](https://gitter.im/s3git/s3git?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
@@ -64,7 +67,7 @@ Build instructions are as follows (see [install golang](https://docs.minio.io/do
 
 ```sh
 $ go get -d github.com/s3git/s3git
-$ cd $GOPATH/src/github.com/s3git/s3git 
+$ cd $GOPATH/src/github.com/s3git/s3git
 $ go install
 $ s3git
 ```
@@ -105,7 +108,7 @@ hello s3git
 ```
 
 _Note: Do not store any important info in the s3git-playground bucket. It will be auto-deleted within 24-hours._
- 
+
 Directory versioning
 --------------------
 
@@ -209,7 +212,7 @@ alice $ s3git push
 ```
 
 Clone it again as `bob` on a different computer/different directory/different universe:
- 
+
 ```sh
 $ mkdir bob && cd bob
 bob $ s3git clone s3://s3git-spoon-knife -a "AKIAJYNT4FCBFWDQPERQ" -s "OVcWH7ZREUGhZJJAqMq4GVaKDKGW6XyKl80qYvkW"
@@ -241,13 +244,13 @@ a48cf36af2211e350ec2b05c98e9e3e63439acd1e9e01a8cb2b46e0e0d65f1625239bd1f89ab3377
 
 _Note: Do not store any important info in the s3git-spoon-knife bucket. It will be auto-deleted within 24-hours._
 
-Here is an nice screen recording:  
+Here is an nice screen recording:
 
 [![asciicast](https://asciinema.org/a/40210.png)](https://asciinema.org/a/40210)
 
 Happy forking!
 
-You may be wondering about concurrent behaviour from 
+You may be wondering about concurrent behaviour from
 
 Integration with Minio
 ----------------------
@@ -256,7 +259,7 @@ Instead of S3 you can happily use the [Minio](https://github.com/minio/minio) se
 
 ```sh
 $ mkdir minio-test && cd minio-test
-$ s3git init 
+$ s3git init
 $ s3git remote add "primary" -r s3://s3git-test -a "Q3AM3UQ867SPQQA43P2F" -s "zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG" -e "https://play.minio.io:9000"
 $ echo "hello minio" | s3git add
 Added: c7bb516db796df8dcc824aec05db911031ab3ac1e5ff847838065eeeb52d4410b4d57f8df2e55d14af0b7b1d28362de1176cd51892d7cbcaaefb2cd3f616342f
@@ -265,7 +268,7 @@ $ s3git push
 Pushing 1 / 1 [==============================================================================================================================] 100.00 % 0
 ```
 
-and clone it 
+and clone it
 
 ```sh
 $ s3git clone s3://s3git-test -a "Q3AM3UQ867SPQQA43P2F" -s "zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG" -e "https://play.minio.io:9000"
@@ -350,11 +353,11 @@ s3git is released under the Apache License v2.0. You can find the complete text 
 FAQ
 ---
 
-**Q** Is s3git compatible to git at the binary level?  
-**A** No. git is optimized for text content with very nice and powerful diffing and using compressed storage whereas s3git is more focused on large repos with primarily non-text blobs backed up by cloud storage like S3.  
-**Q** Do you support encryption?  
-**A** No. However it is trivial to encrypt data before streaming into `s3git add`, eg pipe it through `openssl enc` or similar.  
-**Q** Do you support zipping?  
-**A** No. Again it is trivial to zip it before streaming into `s3git add`, eg pipe it through `zip -r - .` or similar.  
-**Q** Why don't you provide a FUSE interface?  
-**A** Supporting FUSE would mean introducing a lot of complexity related to POSIX which we would rather avoid.  
+**Q** Is s3git compatible to git at the binary level?
+**A** No. git is optimized for text content with very nice and powerful diffing and using compressed storage whereas s3git is more focused on large repos with primarily non-text blobs backed up by cloud storage like S3.
+**Q** Do you support encryption?
+**A** No. However it is trivial to encrypt data before streaming into `s3git add`, eg pipe it through `openssl enc` or similar.
+**Q** Do you support zipping?
+**A** No. Again it is trivial to zip it before streaming into `s3git add`, eg pipe it through `zip -r - .` or similar.
+**Q** Why don't you provide a FUSE interface?
+**A** Supporting FUSE would mean introducing a lot of complexity related to POSIX which we would rather avoid.
