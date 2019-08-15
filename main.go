@@ -37,6 +37,7 @@ func main() {
 	viper.SetConfigName("config") // name of config file (without extension)
 	viper.AddConfigPath("/etc/s3git/")
 	viper.AddConfigPath("$HOME/.s3git")
+	viper.AddConfigPath(".s3git")
 
 	// AWS_PROFILE or S3GIT_PROFILE can set the profile
 	viper.BindEnv("profile", "AWS_PROFILE")
@@ -56,9 +57,7 @@ func main() {
 		viper.SetConfigType("yaml")    // TODO: this should be INI
 		viper.SetConfigFile(extrafile) // name of config file (without extension)
 		err := viper.ReadInConfig()    // Find and read the config file
-		log.Printf("Dump all viper settings: %+v\n\n", viper.AllSettings())
-
-		if err != nil { // Handle errors reading the config file
+		if err != nil {                // Handle errors reading the config file
 			if _, ok := err.(viper.ConfigParseError); ok {
 				panic(fmt.Errorf("Fatal error reading config file: %s \n", err))
 			}
