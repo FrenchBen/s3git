@@ -18,9 +18,9 @@ package cmd
 
 import (
 	"fmt"
+	"github.com/cheggaaa/pb/v3"
 	"github.com/s3git/s3git-go"
 	"github.com/spf13/cobra"
-	"github.com/cheggaaa/pb"
 )
 
 var hydrate bool
@@ -29,7 +29,7 @@ var hydrate bool
 var pushCmd = &cobra.Command{
 	Use:   "push",
 	Short: "Update remote repositories",
-	Long: "Update remote repositories",
+	Long:  "Update remote repositories",
 	Run: func(cmd *cobra.Command, args []string) {
 
 		repo, err := s3git.OpenRepository(".")
@@ -42,9 +42,10 @@ var pushCmd = &cobra.Command{
 		progressPush := func(total int64) {
 			if barPushing == nil {
 				barPushing = pb.New64(total).Start()
-				barPushing.Prefix("Pushing ")
+				barPushing.Set("prefix", "Pushing ")
 			}
-			if barPushing.Increment() == int(total) {
+			barPushing.Increment()
+			if barPushing.Current() == total {
 				barPushing.Finish()
 			}
 		}

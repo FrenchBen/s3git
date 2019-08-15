@@ -17,23 +17,23 @@
 package cmd
 
 import (
-	"os"
 	"fmt"
-	"strings"
+	"os"
 	"path/filepath"
+	"strings"
 
+	"github.com/cheggaaa/pb/v3"
+	"github.com/dustin/go-humanize"
 	"github.com/s3git/s3git-go"
-	"github.com/cheggaaa/pb"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
-	"github.com/dustin/go-humanize"
 )
 
 // cloneCmd represents the clone command
 var cloneCmd = &cobra.Command{
 	Use:   "clone [resource]",
 	Short: "Clone a repository into a new directory",
-	Long: "Clone a repository into a new directory",
+	Long:  "Clone a repository into a new directory",
 	Run: func(cmd *cobra.Command, args []string) {
 
 		if len(args) == 0 {
@@ -69,9 +69,10 @@ var cloneCmd = &cobra.Command{
 		progressDownload := func(total int64) {
 			if barDownloading == nil {
 				barDownloading = pb.New64(total).Start()
-				barDownloading.Prefix("Downloading ")
+				barDownloading.Set("prefix", "Downloading ")
 			}
-			if barDownloading.Increment() == int(total) {
+			barDownloading.Increment()
+			if barDownloading.Current() == total {
 				barDownloading.Finish()
 			}
 		}
@@ -79,9 +80,10 @@ var cloneCmd = &cobra.Command{
 		progressProcessing := func(total int64) {
 			if barProcessing == nil {
 				barProcessing = pb.New64(total).Start()
-				barProcessing.Prefix("Processing  ")
+				barDownloading.Set("prefix", "Processing ")
 			}
-			if barProcessing.Increment() == int(total) {
+			barProcessing.Increment()
+			if barProcessing.Current() == total {
 				barProcessing.Finish()
 			}
 		}
