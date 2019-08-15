@@ -54,10 +54,11 @@ func main() {
 
 	for _, extrafile := range []string{"$HOME/.aws/config", "$HOME/.aws/credentials"} {
 
-		viper.SetConfigType("yaml")    // TODO: this should be INI
+		viper.SetConfigType("toml") // AWS credentials file is in TOML format
+		// This doesn't work, as the config parser expects files with a .toml/.yaml ending
 		viper.SetConfigFile(extrafile) // name of config file (without extension)
 		err := viper.ReadInConfig()    // Find and read the config file
-		if err != nil {                // Handle errors reading the config file
+		if err != nil {                // Handle errors reading the config file - !!!no error if file doesn't exist.
 			if _, ok := err.(viper.ConfigParseError); ok {
 				panic(fmt.Errorf("Fatal error reading config file: %s \n", err))
 			}
